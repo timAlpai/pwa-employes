@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portail EECIE</title>
+
+    <!-- Liens essentiels pour une PWA -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2c3e50"> <!-- Couleur de la barre d'adresse sur mobile -->
+</head>
+<body>
+
+    <!-- Écran de Connexion (visible par défaut) -->
+    <div id="login-screen" class="screen active">
+        <div class="login-container">
+            <img src="https://eecie.ca/logo.svg" alt="Logo EECIE" class="login-logo">
+            <h2>Portail Employé</h2>
+            <form id="login-form">
+                <input type="text" id="username" placeholder="Adresse e-mail" required autocomplete="username">
+                <input type="password" id="password" placeholder="Mot de passe" required autocomplete="current-password">
+                <button type="submit" class="button-primary">Connexion</button>
+                <p id="login-error" class="error-message"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Écran du Tableau de Bord (caché pour l'instant) -->
+    <div id="dashboard-screen" class="screen">
+        <header>
+            <h2>Tableau de Bord</h2>
+            <button id="logout-btn">Déconnexion</button>
+        </header>
+        <div id="dashboard-content">
+            <p>Chargement des données...</p>
+        </div>
+    </div>
+
+    <!-- Le cerveau de l'application -->
+    <script src="app.js"></script>
+</body>
+</html>
