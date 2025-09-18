@@ -1,96 +1,150 @@
-/* style.css - Version Mobile-First pour Employés */
+/* style.css - Version 3 : Responsive & Esthétique */
 
 :root {
-    --primary-color: #34495e; /* Un bleu-gris sobre pour les employés */
-    --success-color: #27ae60;
-    --danger-color: #c0392b;
-    --light-gray: #f4f5f7;
-    --medium-gray: #dfe1e6;
-    --dark-gray: #5e6c84;
-    --text-color: #172b4d;
-    --card-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    --primary-color: #4a6fa5;
+    --success-color: #2ecc71;
+    --danger-color: #e74c3c;
+    --edit-color: #3498db;
+    --light-gray: #f5f7fa;
+    --medium-gray: #eef2f7;
+    --dark-gray: #6c757d;
+    --text-color: #343a40;
+    --card-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    --border-radius: 8px;
+}
+
+/* --- Base et structure globale --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 html, body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     background-color: var(--light-gray);
     color: var(--text-color);
+    line-height: 1.6;
     height: 100%;
 }
 
-/* Structure générale */
 .screen {
     display: none;
-    height: 100%;
-    box-sizing: border-box;
-}
-.screen.active {
-    display: flex; /* Utilisation de flex pour centrer */
     flex-direction: column;
+    height: 100%;
 }
+.screen.active { display: flex; }
 
-/* Écran de connexion */
+/* --- Écran de Connexion (Mobile-First) --- */
 #login-screen {
     justify-content: center;
-    align-items: center;
     padding: 20px;
 }
-
 .login-container {
     width: 100%;
     max-width: 400px;
     background: white;
-    padding: 30px;
-    border-radius: 8px;
+    padding: 25px;
+    border-radius: var(--border-radius);
     box-shadow: var(--card-shadow);
     text-align: center;
 }
+.login-logo { width: 120px; margin-bottom: 20px; }
+.login-container h2 { margin-bottom: 20px; color: var(--primary-color); }
+input, button { font-size: 1rem; width: 100%; padding: 12px; border-radius: 5px; border: 1px solid var(--medium-gray); margin-bottom: 15px; }
+button { cursor: pointer; border: none; font-weight: bold; transition: opacity 0.2s; }
+.button-primary { background-color: var(--primary-color); color: white; }
+.error-message { color: var(--danger-color); font-weight: 500; min-height: 1.2em; font-size: 0.9em; }
 
-.login-logo {
-    width: 150px;
-    margin-bottom: 20px;
-}
-
-/* Formulaires */
-input, button {
-    font-size: 1em;
-    width: 100%;
-    padding: 12px;
-    border-radius: 5px;
-    border: 1px solid var(--medium-gray);
-    box-sizing: border-box;
-    margin-bottom: 15px;
-}
-
-button {
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.2s;
-}
-button:hover { opacity: 0.9; }
-
-.button-primary { background-color: var(--primary-color); }
-.error-message { color: var(--danger-color); font-weight: bold; }
-
-/* Écran du tableau de bord (style de base) */
-#dashboard-screen header {
+/* --- Écran Tableau de Bord --- */
+.main-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: white;
+    padding: 10px 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    flex-shrink: 0;
+}
+.header-logo { height: 35px; }
+#user-info { font-weight: 500; color: var(--dark-gray); display: none; /* Caché sur mobile par défaut */ }
+#logout-btn { background-color: var(--danger-color); color: white; padding: 8px 12px; border-radius: 5px; width: auto; font-size: 0.9em; }
+
+.container {
+    padding: 20px 15px;
+    overflow-y: auto;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Message d'attente / Aucune tâche (responsive) --- */
+.placeholder-message {
     background: white;
-    padding: 15px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 40px 20px;
+    text-align: center;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    margin: auto; /* Centre verticalement et horizontalement */
+    width: 100%;
+    max-width: 500px;
 }
-#dashboard-screen header h2 { margin: 0; font-size: 1.2em; }
-#dashboard-screen #logout-btn {
-    background: var(--danger-color);
-    width: auto;
-    padding: 8px 15px;
+.placeholder-message h2 { color: var(--primary-color); margin-bottom: 10px; }
+.placeholder-message p { color: var(--dark-gray); }
+
+/* --- Carte de Tâche (responsive) --- */
+.task-container {
+    background-color: white;
+    border-radius: var(--border-radius);
+    margin-bottom: 25px;
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
 }
-#dashboard-content {
+.task-section {
     padding: 20px;
-    flex-grow: 1; /* Prend le reste de la hauteur */
+    border-bottom: 1px solid var(--medium-gray);
+}
+.task-container .task-section:last-child { border-bottom: none; }
+.task-section h2 { color: var(--primary-color); margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid var(--medium-gray); font-size: 1.3rem; }
+.client-info { display: grid; grid-template-columns: 1fr; gap: 15px; }
+.info-item { background-color: #f8f9fa; padding: 10px; border-radius: 5px; border-left: 4px solid var(--primary-color); }
+.info-item label { font-weight: bold; color: var(--primary-color); display: block; margin-bottom: 5px; font-size: 0.9em; }
+.info-item span { color: var(--dark-gray); }
+
+.interaction-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+.interaction-header h3 { color: var(--primary-color); margin: 0; font-size: 1.1rem; }
+.btn-new { background-color: var(--success-color); color: white; padding: 8px 12px; border-radius: 4px; font-size: 0.9em; }
+.action-buttons { display: flex; flex-direction: column; gap: 10px; }
+.action-btn { padding: 12px; border-radius: 5px; font-size: 1rem; text-align: center; }
+.btn-delete { background-color: var(--danger-color); color: white; }
+.btn-edit { background-color: var(--edit-color); color: white; }
+.btn-validate { background-color: var(--success-color); color: white; }
+
+/* --- Media Queries pour les écrans plus larges (Tablet et Bureau) --- */
+@media (min-width: 768px) {
+    .container {
+        padding: 30px;
+    }
+    
+    #user-info {
+        display: block; /* Affiche le nom de l'utilisateur */
+    }
+
+    .client-info {
+        grid-template-columns: repeat(2, 1fr); /* 2 colonnes sur tablette */
+    }
+
+    .action-buttons {
+        flex-direction: row; /* Boutons côte à côte */
+    }
+    
+    .action-btn {
+        flex-grow: 1; /* Les boutons prennent une largeur égale */
+    }
+}
+
+@media (min-width: 1024px) {
+    .client-info {
+        grid-template-columns: repeat(3, 1fr); /* 3 colonnes sur grand écran */
+    }
 }

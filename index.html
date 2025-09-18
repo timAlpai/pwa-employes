@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,36 +9,46 @@
     <!-- Liens essentiels pour une PWA -->
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#2c3e50"> <!-- Couleur de la barre d'adresse sur mobile -->
+   
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+
+    <meta name="theme-color" content="#4a6fa5"> <!-- Mise à jour de la couleur thème -->
 </head>
 <body>
 
-    <!-- Écran de Connexion (visible par défaut) -->
+    <!-- Écran de Connexion (inchangé) -->
     <div id="login-screen" class="screen active">
         <div class="login-container">
             <img src="https://eecie.ca/logo.svg" alt="Logo EECIE" class="login-logo">
             <h2>Portail Employé</h2>
             <form id="login-form">
                 <input type="text" id="username" placeholder="Adresse e-mail" required autocomplete="username">
-                <input type="password" id="password" placeholder="Mot de passe" required autocomplete="current-password">
+                <input type="password" id="password" placeholder="Mot de passe d'application" required autocomplete="current-password">
                 <button type="submit" class="button-primary">Connexion</button>
                 <p id="login-error" class="error-message"></p>
             </form>
         </div>
     </div>
 
-    <!-- Écran du Tableau de Bord (caché pour l'instant) -->
+    <!-- Écran du Tableau de Bord (Structure simplifiée) -->
     <div id="dashboard-screen" class="screen">
-        <header>
-            <h2>Tableau de Bord</h2>
+        <header class="main-header">
+            <img src="https://eecie.ca/logo.svg" alt="Logo EECIE" class="header-logo">
+            <div id="user-info"></div>
             <button id="logout-btn">Déconnexion</button>
         </header>
-        <div id="dashboard-content">
-            <p>Chargement des données...</p>
+
+        <!-- NOUVEAU : Conteneur pour la tâche active -->
+        <div id="active-task-container" class="container">
+            <!-- Ce conteneur sera rempli par JavaScript avec la tâche envoyée par le serveur -->
+            <div class="placeholder-message">
+                <h2>En attente d'une nouvelle tâche...</h2>
+                <p>Votre prochaine action vous sera assignée automatiquement.</p>
+            </div>
         </div>
     </div>
 
-    <!-- Le cerveau de l'application -->
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
